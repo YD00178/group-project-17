@@ -1,0 +1,50 @@
+function [] = wordgame()
+%List of words
+list1 = ["golf", "football", "hockey", "basketball", "swimming", "cycling", "badminton", "judo", "karate", "squash", "boxing", "athletics", "darts", "snooker", "pool", "tennis", "curling", "bowling", "skiing", "snowboarding", "esports", "fencing", "kayaking", "triathalon", "canoeing", "chess", "shooting"];
+ 
+list2 = ["Kabul", "London", "Paris", "Madrid", "Dhaka", "Brussels", "Sofia", "Prague", "Berlin", "Reykjavik", "Tokyo", "Amsterdam", "Oslo", "Moscow", "Bucharest", "Dakar", "Ljubljana", "Juba", "Lome", "Cardiff", "Hanoi", "Lisbon", "Warsaw", "Belfast", "Pyongyang", "Wellington", "Dublin", "Athens", "Zagreb"];
+ 
+list3 = ["Cuba", "Egypt", "England", "Scotland", "Fiji", "Finland", "France", "Germany", "Italy", "America", "Ecuador", "Chile", "Chad", "Canada", "Greece", "Iran", "Iraq", "Jamaica", "Jordan", "Kenya", "Kuwait", "Laos", "Latvia", "Mali", "Nepal", "Netherlands", "Norway", "Sweden", "Peru", "Paraguay", "Poland", "Qatar", "Russia", "Portugal", "Romania", "Serbia", "Spain", "Syria", "Switzerland", "Swaziland", "Thailand", "Turkey", "Uganda", "Togo", "Zimbabwe", "Wales", "Uzbekistan"];
+
+%%Introductory message
+disp('Welcome player!')
+disp('Try to guess the word and advance to the next level!')
+disp('LEVEL 1 - Sports!')
+]
+%%Initiates the first stage of the game
+n = randi(length(list1));
+word = lower(convertStringsToChars(list1(n)));
+lives = hangman(word, 10)
+
+%%Determines the number ives the player has any lives left and
+if lives > 0
+    disp('LEVEL 2 - Capital Cities!')
+    n = randi(length(list2));
+    word = lower(convertStringsToChars(list2(n)));
+    lives = hangman(word, lives)
+end
+
+if lives > 0
+    disp('LEVEL 3 - Countries!')
+    n = randi(length(list3));
+    word = lower(convertStringsToChars(list3(n)));
+    lives = hangman(word, lives);
+end
+
+oauth_consumer_key = ('d7I2j0bicfktf9SWI3Qo96XJl');
+oauth_consumer_secret  = ('0LrdxR0kHRDzDmIp67GJbW6i08sFuxi0o2OawCa01Khe4NGZI9');
+oauth_token = ('933038217632342017-YDoqbPWTfiIH20LNCeSdLfExhqqUehu');
+oauth_token_secret = ('MOs4cZEn9aiGZBG7uEb68dfHQCeL5SM8t8qQP9RCxz0KJ');
+
+msg = {'A player just won could you be next','A player just lost, could you beat the game?'};
+
+if lives > 0
+    disp(['Congratulations, you won the game with ', num2str(lives), ' lives remaining!'])
+    [status, result] = twit(msg(1,1),oauth_consumer_key,oauth_consumer_secret,oauth_token,oauth_token_secret);
+else
+    disp('Bad Luck! You lost!')
+    twit;  
+end
+
+end
+
